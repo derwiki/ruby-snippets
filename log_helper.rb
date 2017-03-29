@@ -7,6 +7,10 @@ module LogHelper
     buffer << messages.join(separator)
     Rails.logger.send(level, buffer)
   end
+  
+  def log_exception(e)
+    log "#{e.class}: #{e.message}", level: :error
+  end
 
   def calling_method
     return :block if caller[1].match(/block \(\d+ levels\)/)
